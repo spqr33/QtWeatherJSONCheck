@@ -23,7 +23,8 @@ HEADERS  += \
     lo_treewidget.h \
     data.h \
     downloader.h \
-    weatherwidget.h
+    weatherwidget.h \
+    picojson.h
 
 RESOURCES += \
     res/app_res.qrc
