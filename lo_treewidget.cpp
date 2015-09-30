@@ -12,6 +12,7 @@ LO_TreeWidget::LO_TreeWidget(const QString& sourceFileName, QWidget *parent) :
     QTreeWidget(parent),
     sourceFileName_(sourceFileName)
 {
+    setMinimumWidth(200);
     QStringList lst;
     lst << "Name" << "Id" << "Country" << "Lon" << "Lat";
     setHeaderLabels(lst);

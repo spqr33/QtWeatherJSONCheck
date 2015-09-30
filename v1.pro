@@ -30,3 +30,6 @@ RESOURCES += \
     res/app_res.qrc
 
 QMAKE_CXXFLAGS += -std=c++0x
+
+FORMS += \
+    weather_display.ui
