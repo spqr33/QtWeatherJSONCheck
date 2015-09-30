@@ -28,13 +28,14 @@ private:
     QString urlRoot_;
     QString weatherQuery_;
     QString weatherImgQuery_;
+    QString imgExtention_;
     typedef QMap<QString, QByteArray> ImgCache;
     ImgCache    cache_;
 private:
     void JSONParseAndFill(picojson::value::object& obj);
     void JSONParseAndFill(picojson::value::array& obj);
     void displayError(const QString& title, const QString& message);
-    void setTest(const QString& widgetName, const QString& value);
+    void setText(const QString& widgetName, const QString& value);
     void downloadImg(const QString& imgName);
     const QByteArray* checkCache(const QString& key);
 

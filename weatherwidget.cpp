@@ -15,6 +15,7 @@ WeatherWidget::WeatherWidget(QWidget *parent) :
     urlRoot_ = "http://api.openweathermap.org/";
     weatherQuery_ = "data/2.5/weather/?q=";
     weatherImgQuery_ = "img/w/";
+    imgExtention_ = ".png";
 
     pdl_ = new Downloader(this);
     pdlImg_ = new Downloader(this);
@@ -51,6 +52,9 @@ void WeatherWidget::slotClearFroms()
             (*iter)->clear();
         }
     }
+    {
+        ui->image->clear();
+    }
 }
 
 void WeatherWidget::slotError()
@@ -84,6 +88,11 @@ void WeatherWidget::slotImgDone(const QUrl &, const QByteArray &ba)
     QPixmap pix;
     pix.loadFromData(ba);
     ui->image->setPixmap(pix);
+
+    QVariant qvar = ui->image->property("fileName");
+    QString name = qvar.value<QString>();
+
+    cache_[name] = ba;
 }
 
 void WeatherWidget::JSONParseAndFill(picojson::value::object &obj)
@@ -130,6 +139,7 @@ void WeatherWidget::setText(const QString &widgetName, const QString &value)
 
         if (curr && curr->metaObject()->className() == QString("QLineEdit") ) {
             if (curr->objectName() == "icon") {
+                ui->image->setProperty("fileName", QVariant(value));
                 downloadImg(value);
             }
             qobject_cast<QLineEdit*>(curr)->setText(value);
@@ -138,7 +148,7 @@ void WeatherWidget::setText(const QString &widgetName, const QString &value)
 
 void WeatherWidget::downloadImg(const QString &imgName)
 {
-    QString request = urlRoot_ + weatherImgQuery_ + imgName +".png";
+    QString request = urlRoot_ + weatherImgQuery_ + imgName + imgExtention_;
 
     qDebug() << request;
 
