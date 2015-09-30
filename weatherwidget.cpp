@@ -98,7 +98,7 @@ void WeatherWidget::JSONParseAndFill(picojson::value::object &obj)
         } else if (i->second.is<picojson::array>()) {
             JSONParseAndFill(v.get<picojson::array>());
         } else {
-            setTest(QString().fromStdString(i->first),
+            setText(QString().fromStdString(i->first),
                     QString().fromStdString(i->second.to_str())
                     );
         }
@@ -124,7 +124,7 @@ void WeatherWidget::displayError(const QString &title, const QString& message)
     QMessageBox::critical(0, title, message);
 }
 
-void WeatherWidget::setTest(const QString &widgetName, const QString &value)
+void WeatherWidget::setText(const QString &widgetName, const QString &value)
 {
         QWidget* curr = ui->layoutWidget->findChild<QWidget*>(widgetName);
 
@@ -144,6 +144,7 @@ void WeatherWidget::downloadImg(const QString &imgName)
 
     const QByteArray* ba = checkCache(imgName);
     if( ba != nullptr ) {
+        qDebug() << request << "From cache";
         slotImgDone(QUrl(request), *ba);
     } else {
         pdlImg_->download(QUrl(request));

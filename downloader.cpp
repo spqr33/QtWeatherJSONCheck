@@ -15,10 +15,6 @@ void Downloader::download(const QUrl & url)
     QNetworkRequest request(url);
 
     QNetworkReply* reply = pnam_->get(request);
-//    connect(reply, SIGNAL(downloadProgress(qint64,qint64)),
-//            this, SIGNAL(downloadProgress(qint64,qint64))
-//            );
-
 }
 
 void Downloader::slotFinished(QNetworkReply *reply)
