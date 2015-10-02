@@ -7,6 +7,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    a.setWindowIcon(QIcon(QPixmap(":/icons/mainIcon.png")));
     QWidget central;
     LO_TreeWidget tree(":/allcities/city.list1.json");
     if ( !tree.loadData()) {
