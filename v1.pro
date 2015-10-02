@@ -33,3 +33,4 @@ QMAKE_CXXFLAGS += -std=c++0x
 
 FORMS += \
     weather_display.ui
+LIBS+= -dead_strip
