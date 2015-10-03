@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/allcities">
         <file>city.list1.json</file>
+        <file>city.list.json</file>
     </qresource>
     <qresource prefix="/icons">
         <file>mainIcon.png</file>

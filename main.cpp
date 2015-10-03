@@ -5,6 +5,7 @@
 #include <QWidget>
 #include "logger.h"
 
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -13,7 +14,13 @@ int main(int argc, char *argv[])
     Logger log(Logger::mode::clear);
 
     QWidget central;
+#ifdef QT_DEBUG
     LO_TreeWidget tree(":/allcities/city.list1.json");
+#elif QT_NO_DEBUG
+    LO_TreeWidget tree(":/allcities/city.list.json");
+#else
+#error("Please define QT_DEBUG or QT_DEBUG macro")
+#endif
     if ( !tree.loadData()) {
         return -1;
     }
