@@ -47,11 +47,11 @@ public:
     void connectLogger(const Logger& logger);
 public slots:
     void slotGo         (const QString&);
-    void slotClearFroms();
+    void slotClearFroms ();
 private slots:
     void slotError      ();
     void slotDone       (const QUrl&, const QByteArray&);
-    void slotImgDone       (const QUrl&, const QByteArray&);
+    void slotImgDone    (const QUrl&, const QByteArray&);
 
 };
 

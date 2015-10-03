@@ -35,7 +35,6 @@ City::City(unsigned int id, const QString& name, const QString& country, const C
     country_(country),
     coord_(coord)
 {
-    ;
 }
 
 unsigned City::id() const

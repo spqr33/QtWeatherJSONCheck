@@ -10,14 +10,14 @@ class Coord
 {
     friend class City;
 public:
-    Coord(double lon, double lat) : lon_(lon), lat_(lat){};
+    Coord(double lon, double lat) : lon_(lon), lat_(lat){}
 
     double lon() const;
     double lat() const;
 private:
     double lon_;
     double lat_;
-    Coord() : lon_(0), lat_(0){};
+    Coord() : lon_(0), lat_(0){}
 };
 
 class City {
