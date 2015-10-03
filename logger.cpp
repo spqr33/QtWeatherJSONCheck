@@ -73,7 +73,7 @@ void Logger::addNextLine()
 {
 #if defined(Q_OS_WIN) || defined(Q_OS_WIN32) || defined(Q_OS_OS2)
     log_.write("\r\n", 2);
-#elif Q_OS_MAC
+#elif defined Q_OS_MAC
    log_.write("\n", 1);
 #endif
 
