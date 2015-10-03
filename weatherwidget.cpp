@@ -29,6 +29,14 @@ WeatherWidget::~WeatherWidget()
     delete ui;
 }
 
+void WeatherWidget::connectLogger(const Logger &logger)
+{
+    qDebug() << "Slot connected";
+    connect(pdl_, SIGNAL(done(const QUrl&,const QByteArray&)),
+            &logger, SLOT(slotLog(const QUrl&,const QByteArray&))
+            );
+}
+
 void WeatherWidget::slotGo(const QString & url)
 {
     slotClearFroms();

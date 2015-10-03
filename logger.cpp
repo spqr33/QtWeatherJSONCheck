@@ -6,7 +6,8 @@
 #include <cassert>
 #include <QDateTime>
 
-Logger::Logger( mode::ENUM m)
+Logger::Logger( mode::ENUM m, QObject* parrent ) :
+    QObject(parrent)
 {
     assert( (m == mode::append || m == mode::clear) && "Unknown mode");
     QString currDir = QDir::currentPath();
@@ -35,7 +36,6 @@ Logger::Logger( mode::ENUM m)
 
 Logger::~Logger()
 {
-    qDebug() << "~Logger";
     markEndMessage();
 }
 
@@ -43,7 +43,7 @@ Logger& Logger::operator<<(const QString &logThis)
 {
     QDateTime now = QDateTime::currentDateTime();
     QString date = now.toString() + " ";
-    qDebug() << date;
+    //qDebug() << date;
     log_.write(date.toStdString().c_str(), date.toStdString().size());
 
     log_.write(logThis.toStdString().c_str(), logThis.toStdString().size());
@@ -64,7 +64,7 @@ void Logger::markEndMessage()
 {
     QString message = " Writing finished";
 
-     (*this) << message;
+    (*this) << message;
     addNextLine();
     log_.flush();
 }
@@ -77,4 +77,10 @@ void Logger::addNextLine()
    log_.write("\n", 1);
 #endif
 
+}
+
+void Logger::slotLog(const QUrl& url,const QByteArray& ba)
+{
+    (*this) << url.toString();
+    (*this) << QString(ba);
 }

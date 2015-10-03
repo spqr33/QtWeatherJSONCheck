@@ -12,7 +12,6 @@ int main(int argc, char *argv[])
 
     Logger log(Logger::mode::clear);
 
-    //log << "Message";
     QWidget central;
     LO_TreeWidget tree(":/allcities/city.list1.json");
     if ( !tree.loadData()) {
@@ -20,13 +19,15 @@ int main(int argc, char *argv[])
     }
     tree.show();
 
+    //
     WeatherWidget weather;
     weather.show();
-
+    weather.connectLogger(log);
     QObject::connect(&tree, SIGNAL(activated(QString)),
                      &weather, SLOT(slotGo(QString))
                      );
 
+    //Layouts
     QHBoxLayout* phbl = new QHBoxLayout();
     phbl->addWidget(&tree);
     phbl->addWidget(&weather);

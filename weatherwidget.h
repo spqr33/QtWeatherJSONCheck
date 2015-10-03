@@ -12,6 +12,7 @@
 #include <QString>
 #include "picojson.h"
 #include <QMap>
+#include "logger.h"
 
 namespace Ui {
     class Form;
@@ -42,6 +43,8 @@ private:
 public:
     explicit WeatherWidget(QWidget *parent = 0);
     ~WeatherWidget();
+
+    void connectLogger(const Logger& logger);
 public slots:
     void slotGo         (const QString&);
     void slotClearFroms();
