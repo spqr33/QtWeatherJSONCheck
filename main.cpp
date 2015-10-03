@@ -3,11 +3,16 @@
 #include "weatherwidget.h"
 #include <QHBoxLayout>
 #include <QWidget>
+#include "logger.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     a.setWindowIcon(QIcon(QPixmap(":/icons/mainIcon.png")));
+
+    Logger log(Logger::mode::clear);
+
+    //log << "Message";
     QWidget central;
     LO_TreeWidget tree(":/allcities/city.list1.json");
     if ( !tree.loadData()) {

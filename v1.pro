@@ -17,14 +17,16 @@ SOURCES += main.cpp \
     lo_treewidget.cpp \
     data.cpp \
     downloader.cpp \
-    weatherwidget.cpp
+    weatherwidget.cpp \
+    logger.cpp
 
 HEADERS  += \
     lo_treewidget.h \
     data.h \
     downloader.h \
     weatherwidget.h \
-    picojson.h
+    picojson.h \
+    logger.h
 
 RESOURCES += \
     res/app_res.qrc
