@@ -17,6 +17,7 @@ LO_TreeWidget::LO_TreeWidget(const QString& sourceFileName, QWidget *parent) :
     lst << "Name" << "Id" << "Country" << "Lon" << "Lat";
     setHeaderLabels(lst);
     setSortingEnabled(true);
+
 }
 
 bool LO_TreeWidget::loadData()
@@ -54,6 +55,7 @@ bool LO_TreeWidget::loadData()
               p_twgItem->setText(4, QString::number(sp_city->coord().lat()));
            }
        }
+       sortByColumn(0,Qt::AscendingOrder);
    }
    connect(this,
            SIGNAL(itemActivated(QTreeWidgetItem*,int)),
