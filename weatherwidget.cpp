@@ -9,6 +9,7 @@
 
 WeatherWidget::WeatherWidget(QWidget *parent) :
     QWidget(parent),
+    APPID_("f8bbb1a030af9c566c1a284abbeb7db8"),
     ui(new Ui::Form)
 {
     ui->setupUi(this);
@@ -17,11 +18,13 @@ WeatherWidget::WeatherWidget(QWidget *parent) :
     weatherImgQuery_ = "img/w/";
     imgExtention_ = ".png";
 
+    ui->APPID->setText(APPID_);
     pdl_ = new Downloader(this);
     pdlImg_ = new Downloader(this);
 
     connect(pdl_, SIGNAL(done(const QUrl&,const QByteArray&)), this, SLOT(slotDone(const QUrl&,const QByteArray&)));
     connect(pdlImg_, SIGNAL(done(const QUrl&,const QByteArray&)), this, SLOT(slotImgDone(const QUrl&,const QByteArray&)));
+    connect(ui->btn_resetAPPID, SIGNAL(clicked(bool)), this, SLOT(slotResetToDefault(bool)));
 }
 
 WeatherWidget::~WeatherWidget()
@@ -40,7 +43,7 @@ void WeatherWidget::connectLogger(const Logger &logger)
 void WeatherWidget::slotGo(const QString & url)
 {
     slotClearFroms();
-    QString request = urlRoot_ + weatherQuery_ + url;
+    QString request = urlRoot_ + weatherQuery_ + url +"&APPID=" + ui->APPID->text();
     pdl_->download(QUrl(request));
 }
 
@@ -50,6 +53,9 @@ void WeatherWidget::slotClearFroms()
         QList<QLineEdit*> list = ui->layoutWidget->findChildren<QLineEdit*>();
         QList<QLineEdit*>::iterator iter = list.begin();
         for( ; iter != list.end(); ++iter ) {
+            if ( (*iter)->objectName() == QString("APPID") ){
+                continue;
+            }
             (*iter)->clear();
         }
     }
@@ -101,6 +107,11 @@ void WeatherWidget::slotImgDone(const QUrl &, const QByteArray &ba)
     QString name = qvar.value<QString>();
 
     cache_[name] = ba;
+}
+
+void WeatherWidget::slotResetToDefault(bool)
+{
+    ui->APPID->setText(APPID_);
 }
 
 void WeatherWidget::JSONParseAndFill(picojson::value::object &obj)

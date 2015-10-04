@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>550</width>
-    <height>644</height>
+    <width>600</width>
+    <height>650</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>550</width>
-    <height>620</height>
+    <width>600</width>
+    <height>650</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -24,8 +24,8 @@
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>504</width>
-     <height>624</height>
+     <width>580</width>
+     <height>644</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -33,14 +33,32 @@
      <number>-1</number>
     </property>
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout_3">
-      <property name="spacing">
-       <number>-1</number>
-      </property>
-      <item>
+     <layout class="QGridLayout" name="gridLayout_7">
+      <item row="0" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_13">
+        <item>
+         <widget class="QLabel" name="label_7">
+          <property name="text">
+           <string>OpenWeatherApi APPID: </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="APPID"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btn_resetAPPID">
+          <property name="text">
+           <string>Reset to Default</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="1" column="0">
        <widget class="QLineEdit" name="requestLine"/>
       </item>
-      <item>
+      <item row="2" column="0">
        <widget class="QTextEdit" name="textEdit">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">

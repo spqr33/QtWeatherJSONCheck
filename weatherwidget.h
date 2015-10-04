@@ -30,6 +30,7 @@ private:
     QString weatherQuery_;
     QString weatherImgQuery_;
     QString imgExtention_;
+    const QString APPID_;
     typedef QMap<QString, QByteArray> ImgCache;
     ImgCache    cache_;
 private:
@@ -39,7 +40,6 @@ private:
     void setText(const QString& widgetName, const QString& value);
     void downloadImg(const QString& imgName);
     const QByteArray* checkCache(const QString& key);
-
 public:
     explicit WeatherWidget(QWidget *parent = 0);
     ~WeatherWidget();
@@ -52,6 +52,7 @@ private slots:
     void slotError      ();
     void slotDone       (const QUrl&, const QByteArray&);
     void slotImgDone    (const QUrl&, const QByteArray&);
+    void slotResetToDefault(bool);
 
 };
 
