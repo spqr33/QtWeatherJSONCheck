@@ -27,6 +27,7 @@ private:
     void addNextLine();
 public slots:
     void slotLog(const QUrl&,const QByteArray&);
+    void slotLog(const QUrl&);
 };
 
 #endif // LOGGER_H

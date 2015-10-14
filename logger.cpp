@@ -81,6 +81,11 @@ void Logger::addNextLine()
 
 void Logger::slotLog(const QUrl& url,const QByteArray& ba)
 {
-    (*this) << url.toString();
+    slotLog(url);
     (*this) << QString(ba);
+}
+
+void Logger::slotLog(const QUrl& url)
+{
+    (*this) << url.toString();
 }

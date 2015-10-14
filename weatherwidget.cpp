@@ -35,9 +35,11 @@ WeatherWidget::~WeatherWidget()
 
 void WeatherWidget::connectLogger(const Logger &logger)
 {
-    qDebug() << "Slot connected";
-    connect(pdl_, SIGNAL(done(const QUrl&,const QByteArray&)),
+       connect(pdl_, SIGNAL(done(const QUrl&,const QByteArray&)),
             &logger, SLOT(slotLog(const QUrl&,const QByteArray&))
+            );
+       connect(pdlImg_, SIGNAL(done(const QUrl&,const QByteArray&)),
+            &logger, SLOT(slotLog(const QUrl&))
             );
 }
 
@@ -125,8 +127,6 @@ void WeatherWidget::JSONParseAndFill(picojson::value::object &obj)
 {
     picojson::value::object::const_iterator i = obj.begin();
     for ( ; i != obj.end(); ++i ) {
-        //std::cout << i->first << ": " << i->second.to_str() << std::endl;
-
         picojson::value v =  i->second;
         if (i->second.is<picojson::object>()) {
             JSONParseAndFill(v.get<picojson::object>());
