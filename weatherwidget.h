@@ -52,8 +52,8 @@ private slots:
     void slotError      ();
     void slotDone       (const QUrl&, const QByteArray&);
     void slotImgDone    (const QUrl&, const QByteArray&);
-    void slotResetToDefault(bool);
-
+    void slotResetToDefault (bool);
+    void slotError          (QString errStatus);
 };
 
 #endif // WEATHERWIDGET_H

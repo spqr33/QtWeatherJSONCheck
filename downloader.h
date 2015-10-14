@@ -10,13 +10,15 @@ class Downloader : public QObject
     Q_OBJECT
 private:
     QNetworkAccessManager*  pnam_;
+
+    QString getStringError(QNetworkReply::NetworkError);
 public:
     explicit Downloader(QObject *parent = 0);
 
     void download(const QUrl&);
 signals:
     void done(const QUrl&, const QByteArray&);
-    void error();
+    void error(const QString);
 
 private slots:
     void slotFinished(QNetworkReply*);

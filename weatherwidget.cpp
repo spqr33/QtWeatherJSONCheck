@@ -9,8 +9,8 @@
 
 WeatherWidget::WeatherWidget(QWidget *parent) :
     QWidget(parent),
-    APPID_("f8bbb1a030af9c566c1a284abbeb7db8"),
-    ui(new Ui::Form)
+    ui(new Ui::Form),
+    APPID_("f8bbb1a030af9c566c1a284abbeb7db8")
 {
     ui->setupUi(this);
     urlRoot_ = "http://api.openweathermap.org/";
@@ -25,6 +25,7 @@ WeatherWidget::WeatherWidget(QWidget *parent) :
     connect(pdl_, SIGNAL(done(const QUrl&,const QByteArray&)), this, SLOT(slotDone(const QUrl&,const QByteArray&)));
     connect(pdlImg_, SIGNAL(done(const QUrl&,const QByteArray&)), this, SLOT(slotImgDone(const QUrl&,const QByteArray&)));
     connect(ui->btn_resetAPPID, SIGNAL(clicked(bool)), this, SLOT(slotResetToDefault(bool)));
+    connect(pdl_, SIGNAL(error(QString)), this, SLOT(slotError(QString)));
 }
 
 WeatherWidget::~WeatherWidget()
@@ -73,7 +74,7 @@ void WeatherWidget::slotClearFroms()
 
 void WeatherWidget::slotError()
 {
-    displayError("Error", "An error while download is occured");
+    displayError("Error", "An error while download occured");
 }
 
 void WeatherWidget::slotDone(const QUrl &url, const QByteArray &ba)
@@ -112,6 +113,12 @@ void WeatherWidget::slotImgDone(const QUrl &, const QByteArray &ba)
 void WeatherWidget::slotResetToDefault(bool)
 {
     ui->APPID->setText(APPID_);
+}
+
+void WeatherWidget::slotError(QString errStatus)
+{
+    qDebug() << "Debug message void WeatherWidget::slotError(QString errStatus)";
+    displayError("Error", errStatus);
 }
 
 void WeatherWidget::JSONParseAndFill(picojson::value::object &obj)
